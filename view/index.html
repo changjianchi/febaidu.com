@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="css/markdown.css">
+    <script src="script/jquery.js"></script>
+    <script src="marked/lib/marked.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.42857143;
+            background: #f1f4f7;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+        a {
+            text-decoration: none;
+        }
+        ul {
+            list-style: none;
+        }
+        .header{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 999;
+            width: auto;
+            height: auto;
+            min-height: 50px;
+            background: #222;
+        }
+        .head a {
+            color: #fff;
+        }
+        .head_title {
+            font-size: 16px;
+            float: left;
+            padding: 14px 15px;
+        }
+        .slidebar {
+            position: fixed;
+            left: 0;
+            top: 50px;
+            bottom: 0;
+            z-index: 1000;
+            width: 260px;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+            background: #fff;
+            border-right: 1px solid #eee;
+            box-shadow: 5px 0px 10px rgba(0, 0, 0, .05);
+        }
+        .slidebar a{
+            color: #222;
+            display: block;
+        }
+        .input {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            outline: none;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+        .slidebar form {
+            padding: 20px 15px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        .docx-sug {
+            position: absolute;
+            z-index: 10;
+            width: 100%;
+            display: none;
+        }
+        .nav .sub_nav {
+            display: none;
+        }
+        .nav .sub_nav.in {
+            display: block;
+        }
+        .nav li a {
+            padding: 12px 15px;
+        }
+        .sub_nav li a {
+            text-indent: 3em;
+        }
+        .sub_nav li .sub_nav li a {
+            text-indent: 5em;
+        }
+        .sub_nav li .sub_nav li .sub_nav li a {
+            text-indent: 7em;
+        }
+        .sub_nav li .sub_nav li .sub_nav li .sub_nav li a {
+            text-indent: 9em;
+        }
+        .sub_nav li .sub_nav li .sub_nav li .sub_nav li .sub_nav li a {
+            text-indent: 11em;
+        }
+        .nav li a:focus,
+        .nav li a:hover {
+            background: #eee;
+        }
+        .content {
+            padding: 65px 0 0 0;
+            margin-left: 260px;
+        }
+        .content_box {
+            padding: 0 15px 15px;
+            opacity: .3;
+            filter:alpha(opacity=30);
+            -webkit-transform: translate3d(-10px, 0, 0);
+            -moz-transform: translate3d(-10px, 0, 0);
+            -ms-transform: translate3d(-10px, 0, 0);
+            -o-transform: translate3d(-10px, 0, 0);
+            transform: translate3d(-10px, 0, 0);
+        }
+        .content_transition {
+            -webkit-transition: all 500ms;
+            -moz-transition: all 500ms;
+            -ms-transition: all 500ms;
+            -o-transition: all 500ms;
+            transition: all 500ms;
+        }
+        .content .active {
+            opacity: 1;
+            filter:alpha(opacity=100);
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+        .content_wrap {
+            background: #fff;
+        }
+        .docx_marked {
+            padding: 10px 40px 0;
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        $(function () {
+            var $container = $('.container');
+            var $left_nav = $container.find('.nav');
+            var $content_box = $container.find('.content_box');
+            var $content_marked = $container.find('.docx_marked');
+
+            var data = {{#dirData}};    // 左侧目录树数据
+            var defaultUrl = '{{index}}';   // 默认显示文件
+            var location = window.location.origin;
+
+            var setHtml = function (data) {
+                var html = '';
+
+                data.forEach(function (res) {
+                    html += '<li>';
+                    html += '<a href="' + (res.link ? res.link : '#') + '"' + (res.link ? '' : ' class="nav_title"') + '>' + res.title + '</a>';
+                    if (res.child) {
+                        html += '<ul class="sub_nav">';
+                        html += setHtml(res.child);
+                        html += '</ul>';
+                    }
+                    html += '</li>';
+                });
+
+                return html;
+            };
+            var htmllist = setHtml(data);
+            $left_nav.html(htmllist);
+
+            var setMd = function (url) {
+                var defer = $.Deferred();
+                if (xhr) {
+                    xhr.abort();
+                    xhr = null;
+                }
+                var xhr = $.ajax({
+                    url: url,
+                    success: function (res) {
+                        defer.resolve(res);
+                    },
+                    error: function () {
+                        defer.reject();
+                    }
+                });
+                return defer.promise();
+            };
+
+            var setmd = function (url) {
+                $.when(setMd(url)).then(function (res) {
+                    if ($content_box.hasClass('active')) {
+                        $content_box.removeClass('content_transition');
+                        $content_box.removeClass('active');
+                    }
+                    setTimeout(function () {
+                        $content_box.addClass('content_transition');
+                        $content_box.addClass('active');
+                    }, 20);
+                    $content_marked.html(marked(res));
+                }, function () {
+                    defer.reject();
+                });
+            }
+
+            $left_nav.on('click', 'a', function (event) {
+                var $this = $(this);
+                if ($this.hasClass('nav_title')) {
+                    if ($this.next().hasClass('in')) {
+                        // $this.next().slideUp(200);
+                        $this.next().removeClass('in');
+                    }
+                    else {
+                        // $this.parent().siblings('li').find('.in').slideUp(200).removeClass('in');
+                        $this.parent().siblings('li').find('.in').removeClass('in');
+                        // $this.next().slideDown(200);
+                        $this.next().addClass('in');
+                    }
+                }
+                else {
+                    var link = $this.attr('href');
+                    link = link.split('public')[1];
+                    var url = location + link;
+                    setmd(url);
+                }
+
+                event.stopPropagation();
+                event.preventDefault();
+            });
+
+            setmd(location + defaultUrl);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="head">
+                <a class="head_title" href="/">CJC-DOC</a>
+            </div>
+        </div>
+        <div class="slidebar">
+            <form role="search" action="javascript:void(0);">
+                <input type="text" class="input" placeholder="Search" name="key" autocomplete="off">
+                <div class="docx-sug" style="display: none;">
+                    <ul class="docx-sugul">
+                        <li class="docx-fullse">
+                            <a href="#">全文搜索<span class="hljs-string"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            <ul class="nav"></ul>
+        </div>
+        <div class="content">
+            <div class="content_box content_transition">
+                <div class="content_wrap">
+                    <div class="markdown-body">
+                        <div class="docx_marked"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
