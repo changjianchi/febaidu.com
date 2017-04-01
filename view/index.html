@@ -154,10 +154,21 @@
         }
         .content_wrap {
             background: #fff;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            border-radius: 5px;
         }
         .docx_marked {
             padding: 10px 40px 0;
             overflow: hidden;
+        }
+        .markdown-body img {
+            width: 375px;
+            border: 1px solid #ccc;
+            box-shadow: 5px 5px 5px #ccc;
+            margin-left: 30px;
         }
     </style>
     <script>
@@ -210,6 +221,7 @@
 
             var setmd = function (url) {
                 $.when(setMd(url)).then(function (res) {
+                    window.scrollTo(0,0);
                     if ($content_box.hasClass('active')) {
                         $content_box.removeClass('content_transition');
                         $content_box.removeClass('active');

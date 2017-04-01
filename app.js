@@ -15,7 +15,6 @@ var map = {
     "ignoredir": ["img", "imgs", "image", "images", "css", "style", "script", "js", "javascript", ".svn", ".git", ".DS_Store"],
     "index": "/list/readme.md"
 };
-
 var dir = path.resolve(map.path);
 var app = express();
 
@@ -47,7 +46,7 @@ app.use(function (req, res, next) {
     res.end('404');
 });
 
-var server = app.listen('8888');
+var server = app.listen(map.port);
 
 var setDir = function (dir) {
     var arr = [];
