@@ -13,7 +13,7 @@ var map = {
     "path": "public/list",
     "title": "小常demo",
     "ignoredir": ["img", "imgs", "image", "images", "css", "style", "script", "js", "javascript", ".svn", ".git", ".DS_Store"],
-    "index": "/list/readme.md"
+    "index": "/list/README.md"
 };
 var dir = path.resolve(map.path);
 var app = express();
