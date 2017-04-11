@@ -44,6 +44,7 @@ app.get('/', function (req, res, next) {
 });
 
 app.get('/update', function (req, res, next) {
+    console.log('update');
     require('child_process').exec('git pull');
     res.send('update cache.');
 });
