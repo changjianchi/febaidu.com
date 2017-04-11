@@ -26,20 +26,6 @@ app.set('views', __dirname + '/view');
 
 app.use(express.static('public'));
 
-http.createServer(function (req, res) {
-    if (req.url === '/update') {
-        require('child_process').exec('git pull', function (a, b) {
-                console.log(arguments);
-                 console.log(a, b, new Date().getTime());
-        });
-
-        res.writeHead(200, {
-            'Content-Type': 'text/plain'
-        });
-        res.end('update cache.');
-    }
-}).listen(8004);
-
 // 查找目录数据
 app.use(function (req, res, next) {
     req.dirData = setDir(dir);
@@ -69,6 +55,20 @@ app.get('/update', function (req, res, next) {
 app.use(function (req, res, next) {
     res.end('404');
 });
+
+http.createServer(function (req, res) {
+    if (req.url === '/update') {
+        require('child_process').exec('git pull', function (a, b) {
+                console.log(arguments);
+                 console.log(a, b, new Date().getTime());
+        });
+
+        res.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+        res.end('update cache.');
+    }
+}).listen(8004);
 
 var server = app.listen(map.port);
 
