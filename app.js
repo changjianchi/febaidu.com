@@ -56,6 +56,8 @@ app.use(function (req, res, next) {
     res.end('404');
 });
 
+var server = app.listen(map.port);
+
 http.createServer(function (req, res) {
     if (req.url === '/update') {
         require('child_process').exec('git pull', function (a, b) {
@@ -69,8 +71,6 @@ http.createServer(function (req, res) {
         res.end('update cache.');
     }
 }).listen(8004);
-
-var server = app.listen(map.port);
 
 var setDir = function (dir) {
     var arr = [];
