@@ -1,7 +1,12 @@
 {
+    /* 端口 */
     "port": "8888",
+    /* 文件目录地址 */
     "path": "public/list",
-    "title": "小常demo",
+    /* 站点名称 */
+    "title": "小常",
+    /* 忽略的文件和文件夹 */
     "ignoredir": ["img", "imgs", "image", "images", "css", "style", "script", "js", "javascript", ".svn", ".git", ".DS_Store", ".html", ".htm", ".js", ".css"],
+    /* 默认打开的文件 */
     "index": "/list/README.md"
 }
