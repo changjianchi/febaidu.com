@@ -51,7 +51,7 @@ app.all('/update', function (req, res, next) {
             res.send('update cache err: ' + err.toString());
         }
         else {
-            res.send('update cache.' + __dirname);
+            res.send('update cache.');
         }
     });
 });
