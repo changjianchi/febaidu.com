@@ -36,6 +36,9 @@ app.get('/', function (req, res, next) {
     res.render('./index', {
         title: map.title,
         index: map.index,
+        name: map.name,
+        link: map.link,
+        search: map.search,
         dirData: JSON.stringify(req.dirData, null, 4)
     });
 });
