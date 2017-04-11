@@ -54,7 +54,7 @@
 
                 data.forEach(function (res) {
                     html += '<li>';
-                    html += '<a href="' + (res.link ? res.link : '#') + '"' + (res.link ? '' : ' class="nav_title"') + '>' + res.title + '</a>';
+                    html += '<a href="' + (res.link ? res.link : '') + '"' + (res.link ? '' : ' class="nav_title"') + '>' + res.title + '</a>';
                     if (res.child) {
                         html += '<ul class="sub_nav">';
                         html += setHtml(res.child);
