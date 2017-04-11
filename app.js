@@ -48,10 +48,7 @@ app.get('/update', function (req, res, next) {
         console.log(arguments);
         console.log(a, b, new Date().getTime());
     });
-    res.writeHead(200, {
-        'Content-Type': 'text/plain'
-    });
-    res.end('update cache.');
+    res.send('update cache.');
 });
 
 app.use(function (req, res, next) {
