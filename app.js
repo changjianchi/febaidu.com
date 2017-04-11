@@ -94,6 +94,7 @@ var setDir = function (dir) {
             }
             else {
                 var data = fs.readFileSync(filepath, 'utf-8');
+                // 把读取到的内容按行分割成数组，方便获取到第一行内容
                 var lines = data.split('\n');
                 var title = lines[0].replace('# ', '');
 
