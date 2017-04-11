@@ -47,7 +47,10 @@ app.get('/update', function (req, res, next) {
     require('child_process').exec('git pull', {
         cwd: __dirname
     }, function (err) {
-        if (!err) {
+        if (err) {
+            res.send('update cache err: ' + err.toString());
+        }
+        else {
             res.send('update cache.' + __dirname);
         }
     });
