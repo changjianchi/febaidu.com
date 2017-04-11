@@ -15,6 +15,7 @@ var map = require('./map.json');
 
 var dir = path.resolve(map.path);
 var app = express();
+var webhooks = express();
 
 // 处理模板引擎
 template.config('base', '');
@@ -40,7 +41,7 @@ app.get('/', function (req, res, next) {
     });
 });
 
-app.get('/update', function (req, res, next) {
+webhooks.get('/update', function (req, res, next) {
     require('child_process').exec('git pull', function (a, b) {
         console.log(arguments);
         console.log(a, b, new Date().getTime());
@@ -50,9 +51,12 @@ app.get('/update', function (req, res, next) {
     });
     res.end('update cache.');
 });
+var webhooks_server = webhooks.listen('8004');
 
 app.use(function (req, res, next) {
-    res.end('404');
+    if (req.url !== '/update') {
+        res.end('404');
+    }
 });
 
 var server = app.listen(map.port);
