@@ -1,20 +1,20 @@
+/**
+ * [author changjianchi]
+ * @type {[type]}
+ */
 var express = require('express');
 var fs = require('fs');
+var readline = require('readline');
+var os = require('os');
 var marked = require('marked');
 var template = require('art-template');
 var path = require('path');
-
 /**
  * [map 配置文件]
  * @obj {Object}
  */
-var map = {
-    "port": "8888",
-    "path": "public/list",
-    "title": "小常demo",
-    "ignoredir": ["img", "imgs", "image", "images", "css", "style", "script", "js", "javascript", ".svn", ".git", ".DS_Store"],
-    "index": "/list/README.md"
-};
+var map = require('./map.json');
+
 var dir = path.resolve(map.path);
 var app = express();
 
@@ -48,6 +48,18 @@ app.use(function (req, res, next) {
 
 var server = app.listen(map.port);
 
+var setTitle = function (filename) {
+    var text = 1;
+    var fRead = fs.createReadStream(filename);
+    var objReadline = readline.createInterface({
+        input: fRead
+    });
+    var index = 1;
+    return objReadline.on('line', (line) => {
+        return line;
+    });
+};
+
 var setDir = function (dir) {
     var arr = [];
 
@@ -57,7 +69,7 @@ var setDir = function (dir) {
         var falg = true;
 
         map.ignoredir.forEach(function (val, index) {
-            if (file === val) {
+            if (file.indexOf(val) > -1) {
                 falg = false;
             }
             return;
@@ -72,9 +84,14 @@ var setDir = function (dir) {
                 });
             }
             else {
+                var data = fs.readFileSync(filepath, 'utf-8');
+                var lines = data.split('\n');
+                var title = lines[0].replace('# ', '');
+
                 arr.push({
-                    title: file,
-                    link: filepath,
+                    title: title,
+                    link: filepath.split('public')[1],
+                    filepath: filepath,
                     type: 'file'
                 });
             }
