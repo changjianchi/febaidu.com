@@ -44,9 +44,11 @@ app.get('/', function (req, res, next) {
 });
 
 app.get('/update', function (req, res, next) {
-    console.log('update');
-    require('child_process').exec('git pull');
-    res.send('update cache.', __dirname);
+    require('child_process').exec('git pull', function (a, b) {
+        console.log(arguments);
+        console.log(a, b, new Date().getTime());
+    });
+    res.send('update cache.' + __dirname);
 });
 
 app.use(function (req, res, next) {
