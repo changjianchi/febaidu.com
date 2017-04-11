@@ -1,7 +1,7 @@
 {
     "port": "8888",
     "path": "public/list",
-    "title": "小常",
+    "title": "小常123",
     "ignoredir": ["img", "imgs", "image", "images", "css", "style", "script", "js", "javascript", ".svn", ".git", ".DS_Store", ".html", ".htm", ".js", ".css"],
     "index": "/list/README.md"
 }
