@@ -15,7 +15,6 @@ var map = require('./map.json');
 
 var dir = path.resolve(map.path);
 var app = express();
-var app2 = express();
 
 // 处理模板引擎
 template.config('base', '');
@@ -57,7 +56,7 @@ app.use(function (req, res, next) {
 });
 
 var server = app.listen(map.port);
-
+var app2 = express();
 app2.get('/update', function (req, res, next) {
     require('child_process').exec('git pull', function (a, b) {
         console.log(arguments);
@@ -66,7 +65,7 @@ app2.get('/update', function (req, res, next) {
     res.send('update cache.');
 });
 
-var server2 = app2.listen(8004);
+var server = app2.listen(8004);
 
 var setDir = function (dir) {
     var arr = [];
