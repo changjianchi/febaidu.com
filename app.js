@@ -40,10 +40,19 @@ app.get('/', function (req, res, next) {
     });
 });
 
+app.get('/update', function (req, res, next) {
+    require('child_process').exec('git pull', function (a, b) {
+        console.log(arguments);
+        console.log(a, b, new Date().getTime());
+    });
+    res.writeHead(200, {
+        'Content-Type': 'text/plain'
+    });
+    res.end('update cache.');
+});
+
 app.use(function (req, res, next) {
-    if (req.url !== '/update') {
-        res.end('404');
-    }
+    res.end('404');
 });
 
 var server = app.listen(map.port);
