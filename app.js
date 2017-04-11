@@ -2,7 +2,6 @@
  * [author changjianchi]
  * @type {[type]}
  */
-var http = require('http');
 var express = require('express');
 var fs = require('fs');
 var marked = require('marked');
@@ -25,20 +24,6 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/view');
 
 app.use(express.static('public'));
-
-http.createServer(function (req, res) {
-    if (req.url === '/update') {
-        require('child_process').exec('git pull', function (a, b) {
-                console.log(arguments);
-                 console.log(a, b, new Date().getTime());
-        });
-
-        res.writeHead(200, {
-            'Content-Type': 'text/plain'
-        });
-        res.end('update cache.');
-    }
-}).listen(8004);
 
 // 查找目录数据
 app.use(function (req, res, next) {
