@@ -56,16 +56,6 @@ app.use(function (req, res, next) {
 });
 
 var server = app.listen(map.port);
-var app2 = express();
-app2.get('/update', function (req, res, next) {
-    require('child_process').exec('git pull', function (a, b) {
-        console.log(arguments);
-        console.log(a, b, new Date().getTime());
-    });
-    res.send('update cache.');
-});
-
-var server = app2.listen(8004);
 
 var setDir = function (dir) {
     var arr = [];
