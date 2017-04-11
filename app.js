@@ -4,8 +4,6 @@
  */
 var express = require('express');
 var fs = require('fs');
-var readline = require('readline');
-var os = require('os');
 var marked = require('marked');
 var template = require('art-template');
 var path = require('path');
