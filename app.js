@@ -40,8 +40,18 @@ app.get('/', function (req, res, next) {
     });
 });
 
+app.get('/update', function (req, res, next) {
+    res.render('./index', {
+        title: map.title,
+        index: map.index,
+        dirData: JSON.stringify(req.dirData, null, 4)
+    });
+});
+
 app.use(function (req, res, next) {
-    res.end('404');
+    if (req.url !== '/update') {
+        res.end('404');
+    }
 });
 
 var server = app.listen(map.port);
