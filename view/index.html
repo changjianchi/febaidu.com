@@ -120,11 +120,22 @@
                 else {
                     var link = $this.attr('href');
                     var url = location + link;
+
                     setmd(url);
+
+                    /*var loca = window.location.href;
+                    window.history.pushState(loca, 'url', url);*/
                 }
 
                 event.stopPropagation();
                 event.preventDefault();
+            });
+
+            $(window).on('popstate', function (e) {
+                if (history.state) {
+                    var state = e.state;
+                    console.log(state, 'state');
+                }
             });
 
             setmd(location + defaultUrl);
