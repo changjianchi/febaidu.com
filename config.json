@@ -5,6 +5,7 @@
     "name": "CJC-DOC",
     "link":"/",
     "search": "全文搜索",
+    "static": "public",
     "ignoredir": ["img", "imgs", "image", "images", "css", "style", "script", "js", "javascript", ".svn", ".git", ".DS_Store", ".html", ".htm", ".js", ".css"],
     "index": "/list/README.md"
 }

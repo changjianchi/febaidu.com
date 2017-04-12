@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
+    <title>{{config.title}}</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/markdown.css">
     <script src="script/jquery.js"></script>
@@ -12,7 +12,7 @@
     <div class="container">
         <div class="header">
             <div class="head">
-                <a class="head_title" href="{{link}}">{{name}}</a>
+                <a class="head_title" href="{{config.link}}">{{config.name}}</a>
             </div>
         </div>
         <div class="slidebar">
@@ -21,7 +21,7 @@
                 <div class="docx-sug" style="display: none;">
                     <ul class="docx-sugul">
                         <li class="docx-fullse">
-                            <a href="#">{{search}}<span class="hljs-string"></span></a>
+                            <a href="#">{{config.search}}<span class="hljs-string"></span></a>
                         </li>
                     </ul>
                 </div>
@@ -46,7 +46,7 @@
             var $content_marked = $container.find('.docx_marked');
 
             var data = {{#dirData}};    // 左侧目录树数据
-            var defaultUrl = '{{index}}';   // 默认显示文件
+            var defaultUrl = '{{config.index}}';   // 默认显示文件
             var location = window.location.origin;
 
             var setHtml = function (data) {

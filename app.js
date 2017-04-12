@@ -8,12 +8,12 @@ var marked = require('marked');
 var template = require('art-template');
 var path = require('path');
 /**
- * [map 配置文件]
+ * [config 配置文件]
  * @obj {Object}
  */
-var map = require('./map.json');
+var config = require('./config.json');
 
-var dir = path.resolve(map.path);
+var dir = path.resolve(config.path);
 var app = express();
 
 // 处理模板引擎
@@ -23,7 +23,9 @@ app.engine('.html', template.__express);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/view');
 
-app.use(express.static('public'));
+app.use(express.static(config.static));
+// 委托其他静态目录
+app.use('/', express.static(config.path));
 
 // 查找目录数据
 app.use(function (req, res, next) {
@@ -34,11 +36,7 @@ app.use(function (req, res, next) {
 // 渲染模板
 app.get('/', function (req, res, next) {
     res.render('./index', {
-        title: map.title,
-        index: map.index,
-        name: map.name,
-        link: map.link,
-        search: map.search,
+        config: config,
         dirData: JSON.stringify(req.dirData, null, 4)
     });
 });
@@ -60,7 +58,7 @@ app.use(function (req, res, next) {
     res.end('404');
 });
 
-var server = app.listen(map.port);
+var server = app.listen(config.port);
 
 var setDir = function (dir) {
     var arr = [];
@@ -70,7 +68,7 @@ var setDir = function (dir) {
         var stat = fs.statSync(filepath);
         var falg = true;
 
-        map.ignoredir.forEach(function (val, index) {
+        config.ignoredir.forEach(function (val, index) {
             if (file.indexOf(val) > -1) {
                 falg = false;
             }
