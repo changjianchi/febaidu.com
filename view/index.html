@@ -114,6 +114,7 @@
                     }
                     else {
                         // $this.parent().siblings('li').find('.in').slideUp(200).removeClass('in');
+                        $this.parent().siblings('li').find('.active').removeClass('active');
                         $this.parent().siblings('li').find('.in').removeClass('in');
                         // $this.next().slideDown(200);
                         $(this).addClass('active');
