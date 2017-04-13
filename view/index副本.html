@@ -5,7 +5,8 @@
     <title>{{config.title}}</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/markdown.css">
-    <link rel="stylesheet" type="text/css" href="css/metisMenu.min.css">
+    <script src="script/jquery.js"></script>
+    <script src="marked/lib/marked.js"></script>
 </head>
 <body>
     <div class="container">
@@ -25,7 +26,7 @@
                     </ul>
                 </div>
             </form>
-            <ul class="nav metismenu"></ul>
+            <ul class="nav"></ul>
         </div>
         <div class="content">
             <div class="content_box content_transition">
@@ -37,8 +38,6 @@
             </div>
         </div>
     </div>
-    <script src="script/jquery.js"></script>
-    <script src="marked/lib/marked.js"></script>
     <script>
         $(function () {
             var $container = $('.container');
@@ -55,7 +54,7 @@
 
                 data.forEach(function (res) {
                     html += '<li>';
-                    html += '<a href="' + (res.link ? res.link : '') + '"' + (res.link ? '' : ' class="nav_title"') + '>' + res.title + (res.link ? '' : '<span class="fa arrow"></span>') + '</a>';
+                    html += '<a href="' + (res.link ? res.link : '') + '"' + (res.link ? '' : ' class="nav_title"') + '>' + res.title + '</a>';
                     if (res.child) {
                         html += '<ul class="sub_nav">';
                         html += setHtml(res.child);
@@ -109,14 +108,12 @@
                 if ($this.hasClass('nav_title')) {
                     if ($this.next().hasClass('in')) {
                         // $this.next().slideUp(200);
-                        $(this).removeClass('active');
                         $this.next().removeClass('in');
                     }
                     else {
                         // $this.parent().siblings('li').find('.in').slideUp(200).removeClass('in');
                         $this.parent().siblings('li').find('.in').removeClass('in');
                         // $this.next().slideDown(200);
-                        $(this).addClass('active');
                         $this.next().addClass('in');
                     }
                 }
@@ -126,8 +123,8 @@
 
                     setmd(url);
 
-                    /*var loca = window.location.href;
-                    window.history.pushState(loca, 'url', url);*/
+                    var loca = window.location.href;
+                    window.history.pushState(loca, 'url', url);
                 }
 
                 event.stopPropagation();

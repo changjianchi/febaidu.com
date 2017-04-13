@@ -29,6 +29,7 @@ app.use('/', express.static(config.path));
 
 // 查找目录数据
 app.use(function (req, res, next) {
+    console.log(req.href, 'req');
     req.dirData = setDir(dir);
     next();
 });
