@@ -49,13 +49,16 @@
             var data = {{#dirData}};    // 左侧目录树数据
             var defaultUrl = '{{config.index}}';   // 默认显示文件
             var location = window.location.origin;
+            console.log(window.location);
 
             var setHtml = function (data) {
                 var html = '';
 
                 data.forEach(function (res) {
                     html += '<li>';
-                    html += '<a href="' + (res.link ? res.link : '') + '"' + (res.link ? '' : ' class="nav_title"') + '>' + res.title + (res.link ? '' : '<span class="fa arrow"></span>') + '</a>';
+                    html += '<a href="' + (res.link ? res.link : '') + '"' + (res.link ? '' : ' class="nav_title"') + '>';
+                    html += res.title + (res.link ? '' : '<span class="fa arrow"></span>');
+                    html += '</a>';
                     if (res.child) {
                         html += '<ul class="sub_nav">';
                         html += setHtml(res.child);
@@ -69,16 +72,20 @@
             var htmllist = setHtml(data);
             $left_nav.html(htmllist);
 
-            var setMd = function (url) {
+            var setMd = function (name) {
                 var defer = $.Deferred();
                 if (xhr) {
                     xhr.abort();
                     xhr = null;
                 }
+                console.log(name);
                 var xhr = $.ajax({
-                    url: url,
+                    url: 'api/get',
+                    data: {
+                        name: name
+                    },
                     success: function (res) {
-                        defer.resolve(res);
+                        defer.resolve(res.data);
                     },
                     error: function () {
                         defer.reject();
@@ -87,8 +94,8 @@
                 return defer.promise();
             };
 
-            var setmd = function (url) {
-                $.when(setMd(url)).then(function (res) {
+            var setmd = function (file) {
+                $.when(setMd(file)).then(function (res) {
                     window.scrollTo(0,0);
                     if ($content_box.hasClass('active')) {
                         $content_box.removeClass('content_transition');
@@ -98,7 +105,7 @@
                         $content_box.addClass('content_transition');
                         $content_box.addClass('active');
                     }, 20);
-                    $content_marked.html(marked(res));
+                    $content_marked.html(res);
                 }, function () {
                     defer.reject();
                 });
@@ -108,26 +115,20 @@
                 var $this = $(this);
                 if ($this.hasClass('nav_title')) {
                     if ($this.next().hasClass('in')) {
-                        // $this.next().slideUp(200);
-                        $(this).removeClass('active');
-                        $this.next().removeClass('in');
+                        $(this).removeClass('active').next().removeClass('in');
                     }
                     else {
-                        // $this.parent().siblings('li').find('.in').slideUp(200).removeClass('in');
                         $this.parent().siblings('li').find('.active').removeClass('active');
                         $this.parent().siblings('li').find('.in').removeClass('in');
-                        // $this.next().slideDown(200);
-                        $(this).addClass('active');
-                        $this.next().addClass('in');
+                        $(this).addClass('active').next().addClass('in');
                     }
                 }
                 else {
                     var link = $this.attr('href');
-                    var url = location + link;
+                    setmd(link);
 
-                    setmd(url);
-
-                    /*var loca = window.location.href;
+                    /*var url = location + link;
+                    var loca = window.location.href;
                     window.history.pushState(loca, 'url', url);*/
                 }
 
@@ -135,13 +136,13 @@
                 event.preventDefault();
             });
 
-            $(window).on('popstate', function (e) {
+            /*$(window).on('popstate', function (e) {
                 if (history.state) {
-                    setmd(window.location.href);
+                    setmd(window.location.pathname);
                 }
-            });
+            });*/
 
-            setmd(location + defaultUrl);
+            setmd(defaultUrl);
         });
     </script>
 </body>

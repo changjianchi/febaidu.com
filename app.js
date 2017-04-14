@@ -29,7 +29,6 @@ app.use('/', express.static(config.path));
 
 // 查找目录数据
 app.use(function (req, res, next) {
-    console.log(req.href, 'req');
     req.dirData = setDir(dir);
     next();
 });
@@ -39,6 +38,17 @@ app.get('/', function (req, res, next) {
     res.render('./index', {
         config: config,
         dirData: JSON.stringify(req.dirData, null, 4)
+    });
+});
+
+app.get('/api/get', function (req, res, next) {
+    console.log(req.query.name);
+    var name = req.query.name;
+    name = dir + name;
+    console.log(name);
+    var htmlMd = marked(fs.readFileSync(name, 'utf-8'));
+    res.json({
+        data: htmlMd
     });
 });
 
@@ -92,7 +102,7 @@ var setDir = function (dir) {
 
                 arr.push({
                     title: title,
-                    link: filepath.split('public')[1],
+                    link: filepath.split('list')[1],
                     filepath: filepath,
                     type: 'file'
                 });
