@@ -181,8 +181,8 @@ ul {
     top: 50%;
     bottom: 50%;
     margin: auto;
-    width: 16%;
-    height: 16%;
+    width: 120px;
+    height: 120px;
     display: none;
 }
 .loading img {
