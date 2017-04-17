@@ -52,7 +52,6 @@
             var defaultUrl = '{{config.index}}';   // 默认显示文件
             var windowHeight = $(window).height();
             var location = window.location.origin;
-            console.log(window.location);
             $wrap.css('minHeight', windowHeight - 80 + 'px');
 
             var setHtml = function (data) {
@@ -82,17 +81,15 @@
                     xhr.abort();
                     xhr = null;
                 }
-                console.log(name);
                 var xhr = $.ajax({
                     url: 'api/get',
+                    timeout: 7000,
                     data: {
                         name: name
                     },
                     beforeSend: function () {
-                        console.log('加载前');
                         $content_marked.html('');
                         $loading.show();
-
                     },
                     success: function (res) {
                         if (res && res.data) {
