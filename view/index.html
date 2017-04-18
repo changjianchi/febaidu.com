@@ -47,6 +47,7 @@
         $(function () {
             var $container = $('.container');
             var $left_nav = $container.find('.nav');
+            var $content = $container.find('.content');
             var $content_box = $container.find('.content_box');
             var $wrap = $container.find('.content_wrap');
             var $content_marked = $container.find('.docx_marked');
@@ -172,7 +173,7 @@
                         setHeight($container, 'hidden', $(window).height());
                         $slidebar.addClass('slidebar_active');
                         setTimeout(function () {
-                            $('.header, .content').one('touchstart', function () {
+                            $content.one('touchstart', function () {
                                 if ($slidebar.hasClass('slidebar_active')) {
                                     hideNav();
                                 }
