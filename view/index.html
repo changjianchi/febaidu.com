@@ -143,11 +143,7 @@
                     var link = $this.attr('href');
                     setmd(link);
                     if ($slidebar.hasClass('slidebar_active')) {
-                        $slidebar.removeClass('slidebar_active');
-                        $('body').css({
-                            'overflow': 'auto',
-                            'height': 'auto'
-                        });
+                        hideNav();
                     }
 
                     /*var url = location + link;
@@ -170,28 +166,29 @@
             if ($menue.length) {
                 $menue.on('touchstart', function () {
                     if ($slidebar.hasClass('slidebar_active')) {
-                        $('body').css({
-                            'overflow': 'auto',
-                            'height': 'auto'
-                        });
-                        $slidebar.removeClass('slidebar_active');
+                        hideNav();
                     }
                     else {
-                        $('body').css({
-                            'overflow': 'hidden',
-                            'height': $(window).height()
-                        });
+                        setHeight($container, 'hidden', $(window).height());
                         $slidebar.addClass('slidebar_active');
                         setTimeout(function () {
-                            $('.content').one('touchstart', function () {
-                                $('body').css({
-                                    'overflow': 'auto',
-                                    'height': 'auto'
-                                });
-                                $slidebar.removeClass('slidebar_active');
+                            $('.header, .content').one('touchstart', function () {
+                                if ($slidebar.hasClass('slidebar_active')) {
+                                    hideNav();
+                                }
                             });
                         });
                     }
+                });
+            }
+            function hideNav() {
+                setHeight($container, 'auto', 'auto');
+                $slidebar.removeClass('slidebar_active');
+            }
+            function setHeight(obj, overflow, height) {
+                obj.css({
+                    'overflow': overflow,
+                    'height': height
                 });
             }
         });
