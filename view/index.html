@@ -130,6 +130,8 @@
 
             $left_nav.on('click', 'a', function (event) {
                 var $this = $(this);
+                $left_nav.find('a').removeClass('focus');
+                $(this).addClass('focus');
                 if ($this.hasClass('nav_title')) {
                     if ($this.next().hasClass('in')) {
                         $(this).removeClass('active').next().removeClass('in');

@@ -171,7 +171,8 @@ ul {
     text-indent: 11em;
 }
 .nav li a:focus,
-.nav li a:hover {
+.nav li a:hover,
+.nav li a.focus {
     background: #eee;
 }
 .content {
