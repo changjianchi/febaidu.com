@@ -40,9 +40,47 @@ ul {
     color: #fff;
 }
 .head_title {
+    position: absolute;
+    left: 0;
     font-size: 16px;
-    float: left;
     padding: 14px 15px;
+}
+.head_menue {
+    position: absolute;
+    /*top: 11px;*/
+    right: 0;
+    display: none;
+    height: 100%;
+    padding: 10px 15px 0;
+}
+.head_menue i {
+    position: relative;
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom: 1;
+    width: 30px;
+    height: 2px;
+    color: #fff;
+    font: 700 14px/.4 Helvetica;
+    background: #fff;
+}
+.head_menue i::before,
+.head_menue i::after {
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    -webkit-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
+}
+.head_menue i::before {
+    top: -8px;
+}
+.head_menue i::after {
+    bottom: -8px;
 }
 .slidebar {
     position: fixed;
@@ -197,4 +235,50 @@ ul {
     border: 1px solid #ccc;
     box-shadow: 5px 5px 5px #ccc;
     margin-left: 30px;
+}
+/* 768是ipad像素宽度 */
+@media (max-width: 768px) {
+    .slidebar {
+        opacity: 0;
+        left: -260px;
+        -webkit-transition: all 500ms;
+        -moz-transition: all 500ms;
+        -ms-transition: all 500ms;
+        -o-transition: all 500ms;
+        transition: all 500ms;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .slidebar_active {
+        opacity: 1;
+        -webkit-transform: translate3d(260px, 0, 0);
+        -moz-transform: translate3d(260px, 0, 0);
+        -ms-transform: translate3d(260px, 0, 0);
+        -o-transform: translate3d(260px, 0, 0);
+        transform: translate3d(260px, 0, 0);
+    }
+    .sub_nav li a {
+        text-indent: 1.5em;
+    }
+    .sub_nav li .sub_nav li a {
+        text-indent: 3em;
+    }
+    .sub_nav li .sub_nav li .sub_nav li a {
+        text-indent: 4.5em;
+    }
+    .sub_nav li .sub_nav li .sub_nav li .sub_nav li a {
+        text-indent: 6em;
+    }
+    .sub_nav li .sub_nav li .sub_nav li .sub_nav li .sub_nav li a {
+        text-indent: 7.5em;
+    }
+    .content {
+        margin-left: 0;
+    }
+    .head_menue {
+        display: block;
+    }
 }

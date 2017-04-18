@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>{{config.title}}</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/markdown.css">
@@ -12,6 +13,9 @@
         <div class="header">
             <div class="head">
                 <a class="head_title" href="{{config.link}}">{{config.name}}</a>
+                <div class="head_menue">
+                    <div class="head_menue_box"><i></i></div>
+                </div>
             </div>
         </div>
         <div class="slidebar">
@@ -47,6 +51,8 @@
             var $wrap = $container.find('.content_wrap');
             var $content_marked = $container.find('.docx_marked');
             var $loading = $container.find('.loading');
+            var $menue = $container.find('.head_menue');
+            var $slidebar = $container.find('.slidebar');
 
             var data = {{#dirData}};    // 左侧目录树数据
             var defaultUrl = '{{config.index}}';   // 默认显示文件
@@ -136,6 +142,13 @@
                 else {
                     var link = $this.attr('href');
                     setmd(link);
+                    if ($slidebar.hasClass('slidebar_active')) {
+                        $slidebar.removeClass('slidebar_active');
+                        $('body').css({
+                            'overflow': 'auto',
+                            'height': 'auto'
+                        });
+                    }
 
                     /*var url = location + link;
                     var loca = window.location.href;
@@ -153,6 +166,25 @@
             });*/
 
             setmd(defaultUrl);
+
+            if ($menue.length) {
+                $menue.on('touchstart', function () {
+                    if ($slidebar.hasClass('slidebar_active')) {
+                        $('body').css({
+                            'overflow': 'auto',
+                            'height': 'auto'
+                        });
+                        $slidebar.removeClass('slidebar_active');
+                    }
+                    else {
+                        $('body').css({
+                            'overflow': 'hidden',
+                            'height': $(window).height()
+                        });
+                        $slidebar.addClass('slidebar_active');
+                    }
+                });
+            }
         });
     </script>
 </body>
