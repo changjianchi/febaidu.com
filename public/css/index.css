@@ -58,7 +58,7 @@ ul {
     display: -moz-inline-stack;
     display: inline-block;
     zoom: 1;
-    width: 30px;
+    width: 24px;
     height: 2px;
     color: #fff;
     font: 700 14px/.4 Helvetica;
@@ -67,7 +67,7 @@ ul {
 .head_menue i::before,
 .head_menue i::after {
     content: '';
-    width: 30px;
+    width: 24px;
     height: 2px;
     background: #fff;
     position: absolute;
