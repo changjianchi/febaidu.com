@@ -164,24 +164,22 @@
 
             setmd(defaultUrl);
 
-            if ($menue.length) {
-                $menue.on('touchstart', function () {
-                    if ($slidebar.hasClass('slidebar_active')) {
-                        hideNav();
-                    }
-                    else {
-                        setHeight($container, 'hidden', $(window).height());
-                        $slidebar.addClass('slidebar_active');
-                        setTimeout(function () {
-                            $content.one('touchstart', function () {
-                                if ($slidebar.hasClass('slidebar_active')) {
-                                    hideNav();
-                                }
-                            });
+            $menue.on('touchstart', function () {
+                if ($slidebar.hasClass('slidebar_active')) {
+                    hideNav();
+                }
+                else {
+                    setHeight($container, 'hidden', $(window).height());
+                    $slidebar.addClass('slidebar_active');
+                    setTimeout(function () {
+                        $content.one('touchstart', function () {
+                            if ($slidebar.hasClass('slidebar_active')) {
+                                hideNav();
+                            }
                         });
-                    }
-                });
-            }
+                    });
+                }
+            });
             function hideNav() {
                 setHeight($container, 'auto', 'auto');
                 $slidebar.removeClass('slidebar_active');
