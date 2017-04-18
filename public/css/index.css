@@ -10,6 +10,7 @@ body {
     color: #333;
     line-height: 1.42857143;
     background: #f1f4f7;
+    -webkit-tap-highlight-color: transparent;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 @font-face {font-family: 'fa';
