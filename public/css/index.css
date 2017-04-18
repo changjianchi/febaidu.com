@@ -281,4 +281,8 @@ ul {
     .head_menue {
         display: block;
     }
+    .loading {
+        left: 0;
+        right: 0;
+    }
 }
