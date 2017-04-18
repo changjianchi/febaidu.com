@@ -148,6 +148,7 @@
                             'overflow': 'auto',
                             'height': 'auto'
                         });
+                        return true;
                     }
 
                     /*var url = location + link;
@@ -175,6 +176,7 @@
                             'height': 'auto'
                         });
                         $slidebar.removeClass('slidebar_active');
+                        return true;
                     }
                     else {
                         $('body').css({
@@ -182,6 +184,7 @@
                             'height': $(window).height()
                         });
                         $slidebar.addClass('slidebar_active');
+                        return false;
                     }
                 });
             }
