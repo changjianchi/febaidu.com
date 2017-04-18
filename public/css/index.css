@@ -216,8 +216,8 @@ ul {
     position: fixed;
     left: 42%;
     right: 58%;
-    top: 50%;
-    bottom: 50%;
+    top: 0;
+    bottom: 0;
     margin: auto;
     width: 120px;
     height: 120px;
