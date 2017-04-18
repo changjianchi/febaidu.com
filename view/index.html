@@ -174,10 +174,6 @@
                             'overflow': 'auto',
                             'height': 'auto'
                         });
-                        $container.css({
-                            'overflow': 'auto',
-                            'height': 'auto'
-                        });
                         $slidebar.removeClass('slidebar_active');
                     }
                     else {
@@ -185,18 +181,10 @@
                             'overflow': 'hidden',
                             'height': $(window).height()
                         });
-                        $container.css({
-                            'overflow': 'hidden',
-                            'height': $(window).height()
-                        });
                         $slidebar.addClass('slidebar_active');
                         setTimeout(function () {
                             $('.content').one('touchstart', function () {
                                 $('body').css({
-                                    'overflow': 'auto',
-                                    'height': 'auto'
-                                });
-                                $container.css({
                                     'overflow': 'auto',
                                     'height': 'auto'
                                 });
