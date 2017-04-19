@@ -166,20 +166,29 @@
 
             setmd(defaultUrl);
 
-            $menue.on('touchstart', function () {
-                if ($slidebar.hasClass('slidebar_active')) {
-                    hideNav();
+            $menue.on('touchstart click', function (event) {
+                var setFn = function () {
+                    if ($slidebar.hasClass('slidebar_active')) {
+                        hideNav();
+                    }
+                    else {
+                        setHeight($container, 'hidden', $(window).height());
+                        $slidebar.addClass('slidebar_active');
+                        setTimeout(function () {
+                            $content.one('touchstart', function () {
+                                if ($slidebar.hasClass('slidebar_active')) {
+                                    hideNav();
+                                }
+                            });
+                        });
+                    }
+                };
+                if (event.type === 'touchstart') {
+                    setFn();
+                    return false;
                 }
                 else {
-                    setHeight($container, 'hidden', $(window).height());
-                    $slidebar.addClass('slidebar_active');
-                    setTimeout(function () {
-                        $content.one('touchstart', function () {
-                            if ($slidebar.hasClass('slidebar_active')) {
-                                hideNav();
-                            }
-                        });
-                    });
+                    setFn();
                 }
             });
             function hideNav() {
