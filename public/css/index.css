@@ -48,18 +48,20 @@ ul {
 }
 .head_menue {
     position: absolute;
-    /*top: 11px;*/
-    right: 0;
+    right: 15px;
+    top: 5px;
     display: none;
-    height: 100%;
-    padding: 10px 15px 0;
+    height: auto;
+    padding: 6px 12px 14px;
+    background: #333;
+    border-radius: 4px;
 }
 .head_menue i {
     position: relative;
     display: -moz-inline-stack;
     display: inline-block;
     zoom: 1;
-    width: 24px;
+    width: 22px;
     height: 2px;
     color: #fff;
     font: 700 14px/.4 Helvetica;
@@ -68,7 +70,7 @@ ul {
 .head_menue i::before,
 .head_menue i::after {
     content: '';
-    width: 24px;
+    width: 22px;
     height: 2px;
     background: #fff;
     position: absolute;
