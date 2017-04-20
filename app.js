@@ -41,6 +41,14 @@ app.get('/', function (req, res, next) {
     });
 });
 
+// 渲染模板
+app.get('/post', function (req, res, next) {
+    res.render('./post', {
+        config: config,
+        dirData: JSON.stringify(req.dirData, null, 4)
+    });
+});
+
 app.get('/api/get', function (req, res, next) {
     console.log(req.query.name);
     var name = req.query.name;

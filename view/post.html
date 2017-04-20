@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script src="script/jquery.js"></script>
+    <script>
+    $(function () {
+        var data = {
+            "name": "常健驰",
+            "age": 25,
+            "info": "我是好人"
+        };
+
+        $('.iframe').postMessage(data, 'http://www.febaidu.com/');
+    });
+    </script>
+</head>
+<body>
+    <iframe class="iframe" width="100%" height="500" src="http://www.febaidu.com/test.html"></iframe>
+</body>
+</html>
