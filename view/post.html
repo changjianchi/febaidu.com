@@ -11,18 +11,27 @@
     </style>
     <script src="script/jquery.js"></script>
     <script>
-    $(function () {
-        var data = {
+    /*$(function () {
+        var msg = {
             "name": "常健驰",
             "age": 25,
             "info": "我是好人"
         };
 
-        $('.iframe').postMessage(data, 'http://www.febaidu.com/');
-    });
+        window.frames['iframe'].postMessage(msg,'http://www.febaidu.com/');
+    });*/
+    window.onload=function(){
+        var msg = {
+            "name": "常健驰",
+            "age": 25,
+            "info": "我是好人"
+        };
+
+        window.frames['iframe'].postMessage(msg,'http://www.febaidu.com/');
+    }
     </script>
 </head>
 <body>
-    <iframe class="iframe" width="100%" height="500" src="http://www.febaidu.com/test.html"></iframe>
+    <iframe name="iframe" class="iframe" width="100%" height="500" src="http://www.febaidu.com/test.html"></iframe>
 </body>
 </html>

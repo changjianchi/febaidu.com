@@ -85,16 +85,16 @@ var setDir = function (dir) {
     fs.readdirSync(dir).forEach(function (file) {
         var filepath = path.resolve(dir, file);
         var stat = fs.statSync(filepath);
-        var falg = true;
+        var flag = true;
 
         config.ignoredir.forEach(function (val, index) {
             if (file.indexOf(val) > -1) {
-                falg = false;
+                flag = false;
             }
             return;
         });
 
-        if (falg) {
+        if (flag) {
             if (stat.isDirectory()) {
                 arr.push({
                     title: file,
