@@ -23,9 +23,6 @@ body {
 a {
     text-decoration: none;
 }
-ul {
-    list-style: none;
-}
 .header{
     position: fixed;
     left: 0;
@@ -128,6 +125,9 @@ ul {
     padding: 20px 15px;
     border-bottom: 1px solid #eee;
     margin-bottom: 20px;
+}
+.slidebar ul {
+    list-style: none;
 }
 .docx-sug {
     position: absolute;
