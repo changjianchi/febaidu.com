@@ -159,19 +159,19 @@ a {
     padding: 12px 15px;
 }
 .sub_nav li a {
-    text-indent: 3em;
+    text-indent: 1.5em;
 }
 .sub_nav li .sub_nav li a {
-    text-indent: 5em;
+    text-indent: 3em;
 }
 .sub_nav li .sub_nav li .sub_nav li a {
-    text-indent: 7em;
+    text-indent: 5em;
 }
 .sub_nav li .sub_nav li .sub_nav li .sub_nav li a {
-    text-indent: 9em;
+    text-indent: 7em;
 }
 .sub_nav li .sub_nav li .sub_nav li .sub_nav li .sub_nav li a {
-    text-indent: 11em;
+    text-indent: 9em;
 }
 .nav li a:focus,
 .nav li a:hover,
@@ -235,10 +235,11 @@ a {
     overflow: hidden;
 }
 .markdown-body img {
-    width: 375px;
+    display: block;
+    margin: auto;
+    width: 700px;
     border: 1px solid #ccc;
     box-shadow: 5px 5px 5px #ccc;
-    margin-left: 30px;
 }
 /* 768是ipad像素宽度 */
 @media (max-width: 768px) {
