@@ -1,4 +1,4 @@
-### git多账号配置
+# git多账号配置
 
 - **生成公钥私钥**
     - ssh-keygen -t rsa -C "changjianchi@qq.com" -f ~/.ssh/cjc
