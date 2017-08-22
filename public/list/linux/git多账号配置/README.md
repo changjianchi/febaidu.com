@@ -6,7 +6,7 @@
 
 - **添加到高速缓存**
     - 添加私钥到ssh-agent的高速缓存中
-        - ssh-add cjc
+        - ssh-add -k cjc `-k 永久生效，不加的话在重启电脑之后就失效了`
     - 查看缓存列表
         - ssh-add -l
 
